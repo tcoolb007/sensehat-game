@@ -15,8 +15,8 @@ w = [255, 255, 255]
 g = [0, 255, 0]
 e = [0, 0, 0]
 
-manX = 1
-manY = 4
+man_x = 1
+man_y = 4
 blacklist = [[0,5],[1,5],[2,4],[3,4],[4,5],[5,5],[6,5],[7,5]]
 
 go = [
@@ -46,20 +46,29 @@ sense.set_pixels(go)
 sleep(1)
 running = True
 
+def whitelist(x,y):
+    for e in range(len(blacklist)):
+        item = blacklist[e]
+        cur_x = item[0]
+        cur_y = item[1]
+        if x == cur_x and y == cur_y:
+            return True
+    return False
+
 while running:
     for event in pygame.event.get():
         if event.type == KEYDOWN:
-            if event.key == K_UP and manY < 7:
-                manY = manY + 1
-            if event.key == K_DOWN and manY > 0:
-                manY = manY - 1
-            if event.key == K_LEFT and manX < 7:
-                manX = manX + 1
-            if event.key == K_RIGHT and manX > 0:
-                manX = manX - 1
+            if event.key == K_UP and man_y < 7 and whitelist(man_x, man_y + 1):
+                man_y = man_y + 1
+            if event.key == K_DOWN and man_y > 0 and whitelist(man_x, man_y - 1):
+                man_y = man_y - 1
+            if event.key == K_LEFT and man_x < 7 and whitelist(man_x + 1, man_y):
+                man_x = man_x + 1
+            if event.key == K_RIGHT and man_x > 0 and whitelist(man_x - 1, man_y):
+                man_x = man_x - 1
         if event.type == QUIT:
             running = False
             print("bye")
         sense.set_pixels(bg)
-        sense.set_pixel(manX, manY, [255, 125, 0])
+        sense.set_pixel(man_x, man_y, [255, 125, 0])
 
