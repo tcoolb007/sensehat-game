@@ -52,8 +52,8 @@ def whitelist(x,y):
         cur_x = item[0]
         cur_y = item[1]
         if x == cur_x and y == cur_y:
-            return True
-    return False
+            return False
+    return True
 
 while running:
     for event in pygame.event.get():
