@@ -43,15 +43,13 @@ g,g,g,g,g,g,g,g
 
 sense.clear()
 sense.set_pixels(go)
-sleep(1)
 running = True
 
 def whitelist(x,y):
+    scan = [x, y]
     for e in range(len(blacklist)):
         item = blacklist[e]
-        cur_x = item[0]
-        cur_y = item[1]
-        if x == cur_x and y == cur_y:
+        if item == scan: 
             return False
     return True
 
@@ -66,9 +64,10 @@ while running:
                 man_x = man_x + 1
             if event.key == K_RIGHT and man_x > 0 and whitelist(man_x - 1, man_y):
                 man_x = man_x - 1
+            sense.set_pixels(bg)
+            sense.set_pixel(man_x, man_y, [255, 125, 0])
         if event.type == QUIT:
             running = False
             print("bye")
-        sense.set_pixels(bg)
-        sense.set_pixel(man_x, man_y, [255, 125, 0])
+            sense.clear()
 
