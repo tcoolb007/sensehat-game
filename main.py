@@ -13,6 +13,7 @@ sense.set_rotation(180)
 b = [0, 0, 255]
 w = [255, 255, 255]
 g = [0, 255, 0]
+y = [255, 255, 0]
 e = [0, 0, 0]
 
 man_x = 1
@@ -31,17 +32,27 @@ e,e,e,e,e,e,e,e
 ]
 
 bg = [
-b,b,b,b,b,b,b,b,
-b,w,w,w,b,b,b,b,
+b,b,b,b,b,b,b,w,
+b,w,w,w,b,b,b,e,
 b,w,w,w,b,b,w,w,
-b,b,b,b,b,b,w,w,
-b,b,g,g,b,b,b,b,
-g,g,g,g,g,g,g,g,
-g,g,g,g,g,g,g,g,
-g,g,g,g,g,g,g,g
+b,b,b,b,b,b,w,e,
+b,b,g,g,b,b,b,w,
+g,g,g,g,g,g,g,e,
+g,g,g,g,g,g,g,w,
+g,g,g,g,g,g,g,e
 ]
 
-sense.clear()
+win = [
+e,e,e,e,e,e,e,e,
+e,e,y,e,e,y,e,e,
+e,e,y,e,e,y,e,e,
+e,e,y,e,e,y,e,e,
+e,e,e,e,e,e,e,e,
+e,y,e,e,e,e,y,e,
+e,e,y,y,y,y,e,e,
+e,e,e,e,e,e,e,e
+]
+
 sense.set_pixels(go)
 running = True
 
@@ -68,6 +79,11 @@ while running:
             sense.set_pixel(man_x, man_y, [255, 125, 0])
         if event.type == QUIT:
             running = False
-            print("bye")
-            sense.clear()
+    if man_x == 7:
+        sense.set_pixels(win)
+        print("you win")
+        sleep(10)
+        running = False
 
+print("bye")
+sense.clear()
