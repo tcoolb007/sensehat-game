@@ -13,9 +13,8 @@ e = [0, 0, 0]
 
 man_x = 1
 man_y = 4
-blacklist = [[0,5],[1,5],[2,4],[3,4],[4,5],[5,5],[6,5],[7,5]]
+path = [[0,4],[1,4],[1,3],[2,3],[3,3],[4,3],[4,4],[5,4],[6,4],[7,4]]
 pressed = sense_hat.ACTION_PRESSED
-
 
 go = [
 e,e,e,e,e,e,e,e,
@@ -54,12 +53,11 @@ sense.set_pixels(go)
 running = True
 
 def whitelist(x,y):
-    scan = [x, y]
-    for e in range(len(blacklist)):
-        item = blacklist[e]
-        if item == scan: 
-            return False
-    return True
+    for e in range(len(path)):
+        item = path[e]
+        if item == [x,y]: 
+            return True
+    return False 
 
 while running:
     for event in sense.stick.get_events():
